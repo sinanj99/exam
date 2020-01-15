@@ -1,6 +1,6 @@
 package rest;
 
-import entities.Post;
+import entities.Course;
 import utils.EMF_Creator;
 import io.restassured.RestAssured;
 import static io.restassured.RestAssured.given;
@@ -30,7 +30,7 @@ public class ServerResourceTest {
 
     private static final int SERVER_PORT = 7777;
     private static final String SERVER_URL = "http://localhost/api";
-    private static Post r1,r2;
+    private static Course r1,r2;
     
     static final URI BASE_URI = UriBuilder.fromUri(SERVER_URL).port(SERVER_PORT).build();
     private static HttpServer httpServer;
