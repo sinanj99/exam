@@ -6,7 +6,11 @@
     <class>entities.RenameMe</class>
     <class>entities.User</class>
     <class>entities.Role</class>
-    <class>entities.Post</class>
+    <class>entities.Course</class>
+    <class>entities.Teacher</class>
+    <class>entities.SignedUp</class>
+    <class>entities.Student</class>
+    <class>entities.Class</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <!-- DO NOT remove the line below. It's not set by the  entityUtils.EMF_Creator -->
