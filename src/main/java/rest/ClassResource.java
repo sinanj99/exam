@@ -15,6 +15,7 @@ import java.util.List;
 import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -33,11 +34,11 @@ import utils.EMF_Creator;
  */
 @Path("class")
 public class ClassResource {
-    
+
     private static EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory(EMF_Creator.DbSelector.DEV, EMF_Creator.Strategy.CREATE);
     private final ClassFacade FACADE = ClassFacade.getClassFacade(EMF);
     private Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-    
+
     @Context
     private UriInfo context;
 
@@ -49,19 +50,21 @@ public class ClassResource {
     public String getInfoForAll() {
         return "{\"msg\":\"Hello anonymous\"}";
     }
-    
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("all")
     public List<ClassDTO> getAllClasses() {
         return FACADE.getAllClasses();
     }
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("id/{id}")
     public ClassDTO getClassById(@PathParam("id") int id) {
         return FACADE.getClassById(id);
     }
+
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -70,7 +73,6 @@ public class ClassResource {
         ClassDTO classDTO = GSON.fromJson(class_, ClassDTO.class);
         return FACADE.addClass(classDTO);
     }
-    
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
@@ -81,7 +83,16 @@ public class ClassResource {
         ClassDTO classDTO = GSON.fromJson(p, ClassDTO.class);
         return FACADE.editClass(classDTO);
     }
-    
+
+    @DELETE
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("delete/{id}")
+    @RolesAllowed("admin")
+    public ClassDTO deleteClass(@PathParam("id") int id) {
+        return FACADE.removeClass(id);
+    }
+
 //    @GET
 //    @Path("{id}")
 //    @Produces(MediaType.APPLICATION_JSON)
@@ -98,4 +109,3 @@ public class ClassResource {
 //        return FACADE.getPersonsByHobby(hobby);
 //    }
 }
-

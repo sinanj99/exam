@@ -121,4 +121,16 @@ public class ClassFacade {
         }
         return new ClassDTO(class_);
     }
+    public ClassDTO removeClass(int id) {
+        EntityManager em =emf.createEntityManager();
+        Class c = em.find(Class.class, id);
+        try {
+            em.getTransaction().begin();
+            em.remove(c);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+        return new ClassDTO(c);
+    }
 }
