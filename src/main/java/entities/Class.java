@@ -7,6 +7,7 @@ package entities;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,17 +29,27 @@ public class Class implements Serializable {
     private int id;
     private String semester;
     private int maxNumbOfStudents;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Course course;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Teacher> teachers;
-    @OneToMany
+    @OneToMany(mappedBy = "class_", cascade = CascadeType.PERSIST)
     private List<SignedUp> signedUps;
-    
+
     public Class() {
     }
 
-    public Class(String semester, int maxNumbOfStudents, Course course) {
+    public Class(String semester, int maxNumbOfStudents, Course course, List<Teacher> teachers,
+            List<SignedUp> signedUps) {
+        this.semester = semester;
+        this.maxNumbOfStudents = maxNumbOfStudents;
+        this.course = course;
+        this.teachers = teachers;
+        this.signedUps = signedUps;
+    }
+
+    public Class(int id, String semester, int maxNumbOfStudents, Course course) {
+        this.id = id;
         this.semester = semester;
         this.maxNumbOfStudents = maxNumbOfStudents;
         this.course = course;
@@ -59,7 +70,7 @@ public class Class implements Serializable {
     public void setSignedUps(List<SignedUp> signedUps) {
         this.signedUps = signedUps;
     }
-    
+
     public String getSemester() {
         return semester;
     }
@@ -83,7 +94,7 @@ public class Class implements Serializable {
     public void setCourse(Course course) {
         this.course = course;
     }
-    
+
     public int getId() {
         return id;
     }
@@ -91,10 +102,10 @@ public class Class implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
-    
+
     @Override
     public String toString() {
         return "entities.Class[ id=" + id + " ]";
     }
-    
+
 }

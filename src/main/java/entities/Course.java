@@ -15,7 +15,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 /**
- * 
+ *
  * @author sinanjasar
  */
 @Entity
@@ -35,10 +35,15 @@ public class Course implements Serializable {
     public Course() {
     }
 
-    public Course(String courseName, String description, List<Class> classes) {
+    public Course(String courseName, String description) {
         this.courseName = courseName;
         this.description = description;
-        this.classes = classes;
+    }
+
+    public Course(int id, String courseName, String description) {
+        this.id = id;
+        this.courseName = courseName;
+        this.description = description;
     }
 
     public List<Teacher> getTeachers() {
@@ -48,7 +53,7 @@ public class Course implements Serializable {
     public void setTeachers(List<Teacher> teachers) {
         this.teachers = teachers;
     }
-    
+
     public int getId() {
         return id;
     }
@@ -81,7 +86,6 @@ public class Course implements Serializable {
         this.classes = classes;
     }
 
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -106,5 +110,5 @@ public class Course implements Serializable {
     public String toString() {
         return "entities.Planet[ id=" + id + " ]";
     }
-    
+
 }

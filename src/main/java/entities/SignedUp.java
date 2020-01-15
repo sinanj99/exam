@@ -7,10 +7,12 @@ package entities;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
@@ -27,17 +29,23 @@ public class SignedUp implements Serializable {
     private int id;
     private int grade;
     private String passedDate;
+    @JoinColumn(nullable = false)
     @ManyToOne
     private Class class_;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Student student;
             
     public SignedUp() {
     }
 
-    public SignedUp(int grade, String passedDate) {
+    public SignedUp(int grade, String passedDate, Student student) {
         this.grade = grade;
         this.passedDate = passedDate;
+        this.student = student;
+    }
+
+    public SignedUp(Student student) {
+        this.student = student;
     }
 
     public Class getClass_() {

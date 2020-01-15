@@ -38,6 +38,11 @@ public class Student implements Serializable {
         this.signedUps = signedUps;
     }
 
+    public Student(String name, String email) {
+        this.name = name;
+        this.email = email;
+    }
+
     public String getName() {
         return name;
     }

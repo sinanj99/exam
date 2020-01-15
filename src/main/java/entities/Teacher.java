@@ -39,6 +39,11 @@ public class Teacher implements Serializable {
         this.classes_ = classes_;
     }
 
+    public Teacher(String name) {
+        this.name = name;
+    }
+    
+
     public String getName() {
         return name;
     }
