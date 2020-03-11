@@ -1,5 +1,8 @@
 [![Build Status](https://travis-ci.org/dat3startcode/rest-jpa-devops-startcode.svg?branch=master)](https://travis-ci.org/dat3startcode/rest-jpa-devops-startcode)
 
+### About
+Exposes a REST API using Jersey and Eclipselink. 
+
 ### Preconditions
 *In order to use this code, you should have a local developer setup + a "matching" droplet on Digital Ocean* 
 # Getting Started
